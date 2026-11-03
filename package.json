@@ -1,0 +1,31 @@
+{
+  "name": "interview-workbench",
+  "version": "1.0.0",
+  "description": "An offline-friendly interview practice workbench with structured questions, STAR notes, timed rehearsal and business case exercises.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "author": "Interview Workbench contributors",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LeiQingliang/interview-workbench.git"
+  },
+  "homepage": "https://LeiQingliang.github.io/interview-workbench/",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/serve.mjs",
+    "preview": "node scripts/serve.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test tests/core.test.mjs",
+    "test:e2e": "playwright test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "prettier": "3.8.1"
+  }
+}

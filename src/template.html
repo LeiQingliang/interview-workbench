@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="{{CSP}}" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta
+      name="description"
+      content="免费的开源面试练习工作台：结构化问答、STAR案例、计时模拟、商家经营分析与浏览器本地笔记。"
+    />
+    <title>Interview Workbench · 面试练习工作台</title>
+    <style>
+      /* __STYLES__ */
+    </style>
+  </head>
+  <body>
+    <a href="#main" class="skip">跳转到正文</a>
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">↗</div>
+        <div>面试练习工作台<small>INTERVIEW / WORKBENCH</small></div>
+      </div>
+      <div class="edition">开源 · 通用练习版<br />INTERVIEW WORKBENCH / v{{VERSION}}</div>
+      <nav aria-label="章节目录">{{NAV}}</nav>
+      <div class="sidebar-foot">
+        <div class="progress-row">
+          <span>我的练习进度</span><span id="progressLabel">0 / {{QUESTION_COUNT}} 题</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="save-status" id="saveStatus">笔记与进度仅保存在本浏览器</div>
+        <div class="sidebar-actions">
+          <button class="btn" id="resetData">清除本地记录</button
+          ><a
+            class="btn"
+            href="https://github.com/LeiQingliang/interview-workbench"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub ↗</a
+          >
+        </div>
+      </div>
+    </aside>
+    <div class="page">
+      <header class="toolbar">
+        <button
+          class="btn menu-btn"
+          id="menu"
+          aria-label="打开目录"
+          aria-expanded="false"
+          aria-controls="sidebar"
+        >
+          ☰</button
+        ><label for="search"
+          ><span class="sr-only" hidden>搜索练习题</span
+          ><input
+            id="search"
+            type="search"
+            placeholder="搜索题目、数据或关键词…"
+            aria-label="搜索面试题" /></label
+        ><select id="filter" aria-label="题目筛选">
+          <option value="all">全部题目</option>
+          <option value="must">只看必练</option>
+          <option value="favorite">我的重点</option>
+          <option value="unpracticed">尚未练习</option></select
+        ><button class="btn" id="export" aria-label="导出练习笔记">
+          ↓ <span class="export-label">导出笔记</span></button
+        ><button class="btn desktop" id="print">打印 / 存为 PDF</button>
+      </header>
+      <main id="main" class="content">
+        <section class="hero">
+          <div class="hero-top">
+            <div class="eyebrow">PREPARE WITH FACTS / SPEAK WITH CLARITY</div>
+            <span class="pill">OPEN SOURCE · v{{VERSION}}</span>
+          </div>
+          <h1>把真实经历，<br />讲成<em>有说服力的业务答案。</em></h1>
+          <p class="hero-sub">
+            Interview Workbench · 面试练习工作台<br />结构化表达 × 客户经营 × 数据判断
+          </p>
+          <div class="hero-actions">
+            <button class="btn primary" data-jump="opening">开始练习 ↗</button
+            ><button class="btn ghost" id="startQuiz">计时模拟练习</button
+            ><button class="btn ghost" id="onlyMust">只看必练题</button>
+          </div>
+          <div class="hero-meta">
+            <span>匿名通用内容</span><span>搜索 / 重点标记 / 案例笔记</span
+            ><span>离线可用 · 无运行时依赖</span>
+          </div>
+          <div class="hero-bottom">
+            <div class="hero-stat">
+              <b id="questionCount">{{QUESTION_COUNT}}</b><span>带思路与追问的练习题</span>
+            </div>
+            <div class="hero-stat">
+              <b id="mustCount">{{MUST_COUNT}}</b><span>优先完成的必练题</span>
+            </div>
+            <div class="hero-stat"><b>{{CHAPTER_COUNT}}</b><span>从准备到复盘的学习模块</span></div>
+          </div>
+        </section>
+        <p class="mini-note">
+          本工具用于面试前练习，不代表任何公司的官方题库，不保证录用结果。填写内容保存在此浏览器；请导出备份，勿填写客户身份或商业秘密。
+        </p>
+        <section id="searchPanel" class="search-panel" hidden>
+          <div class="search-head">
+            <h2 id="searchCount">检索结果</h2>
+            <button class="btn" id="clearSearch">返回完整手册</button>
+          </div>
+          <div id="searchList"></div>
+        </section>
+        <div id="chapters">{{CHAPTERS}}</div>
+        <footer class="closing">
+          PREPARE WITH FACTS. SPEAK WITH CLARITY.<br />真实经历 · 清楚表达 · 业务判断 ·
+          仅供面试前练习
+        </footer>
+      </main>
+    </div>
+    <dialog id="quiz" aria-labelledby="quizTitle">
+      <div class="modal-head">
+        <h2 id="quizTitle">面试前 · 计时模拟</h2>
+        <button class="btn" id="quizClose" aria-label="关闭模拟练习">关闭 ×</button>
+      </div>
+      <div class="modal-body">
+        <div class="quiz-controls">
+          <select id="quizCategory" aria-label="练习题类型">
+            <option value="all">全部类型</option></select
+          ><select id="duration" aria-label="回答时长">
+            <option value="60">60 秒</option>
+            <option value="90" selected>90 秒</option>
+            <option value="120">120 秒</option>
+            <option value="180">180 秒</option></select
+          ><button class="btn" id="timerStart">开始计时</button
+          ><button class="btn" id="timerReset">重置</button>
+        </div>
+        <div class="timer" id="timer" aria-live="off">01:30</div>
+        <div class="eyebrow" id="quizCategoryLabel"></div>
+        <div class="quiz-question" id="quizQuestion"></div>
+        <p class="small">
+          先脱稿回答，再对照参考。自检：是否直接回答、是否说明本人动作、是否有事实依据、是否回应业务目标。
+        </p>
+        <div class="quiz-controls">
+          <button class="btn primary" id="nextQuestion">下一题 ↗</button
+          ><button class="btn" id="showAnswer">查看练习参考</button
+          ><button class="btn" id="quizDone">标记本题已练</button>
+        </div>
+        <div id="quizAnswer" class="quiz-answer" hidden></div>
+      </div>
+    </dialog>
+    <button class="backtop" id="backtop" aria-label="回到顶部">↑</button>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script>
+      /* __SCRIPT__ */
+    </script>
+  </body>
+</html>

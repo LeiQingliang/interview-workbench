@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 安全问题报告
+    url: https://github.com/LeiQingliang/interview-workbench/blob/main/SECURITY.md
+    about: 报告漏洞前请阅读安全政策，避免公开敏感信息或利用细节。
+  - name: 内容贡献指南
+    url: https://github.com/LeiQingliang/interview-workbench/blob/main/docs/content-guide.md
+    about: 查看事实、假设案例、数据口径和引用许可的编写要求。

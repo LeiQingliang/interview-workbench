@@ -1,0 +1,59 @@
+<div class="lab">
+  <h3>调一组参数，练一次商家算账</h3>
+  <p>
+    以下数字全部是假设练习，不是抖音收费规则或任何品牌实际数据。先口算方向，再调整参数观察变化。
+  </p>
+  <div class="lab-grid">
+    <div class="lab-controls">
+      <label for="calcPrice">套餐实付价（元 / 单）</label
+      ><input id="calcPrice" type="number" min="0" value="49" step="1" />
+      <label for="calcCost">单次履约变动成本（元 / 核销单）</label
+      ><input id="calcCost" type="number" min="0" value="25" step="1" />
+      <label for="calcOrders">同一批次支付订单数（单）</label
+      ><input id="calcOrders" type="number" min="0" value="2000" step="100" />
+      <label for="calcRate">该批次观察期内核销率（%）</label
+      ><input id="calcRate" type="number" min="0" max="100" value="60" step="5" />
+      <label for="calcFee">按核销收入计提的综合费用率（假设 %）</label
+      ><input id="calcFee" type="number" min="0" max="100" value="3" step="1" />
+      <label for="calcMarket">活动营销投入（元）</label
+      ><input id="calcMarket" type="number" min="0" value="5000" step="500" />
+      <label for="calcOps">本次新增运营支出（元）</label
+      ><input id="calcOps" type="number" min="0" value="1000" step="100" />
+    </div>
+    <div>
+      <div class="lab-results">
+        <div class="result"><small>观察期内核销订单</small><b id="rRedeem">1,200</b></div>
+        <div class="result"><small>核销收入（简化口径）</small><b id="rRevenue">¥58,800</b></div>
+        <div class="result"><small>活动贡献（简化）</small><b id="rContribution">¥21,036</b></div>
+        <div class="result"><small>盈亏平衡支付订单数</small><b id="rBreak">444</b></div>
+        <div class="formula">
+          活动贡献 = 核销单数 × [实付价 × (1 − 费用率) − 单次变动成本] − 营销投入 − 新增运营支出
+        </div>
+      </div>
+      <p id="calcExplanation" class="lab-assumption"></p>
+      <p class="lab-assumption">
+        模型假设费用按核销收入计提，订单同价，成本线性，观察期一致；实际结算规则应另行核对。未纳入税费、企业既有固定费用、履约后退款及老客渠道替代，结果不能直接称为净利润或增量利润。尚未核销的订单不计入本模型收入。
+      </p>
+    </div>
+  </div>
+</div>
+<div class="card-grid">
+  <div class="card">
+    <h3>面试官追问：核销率越高越好吗？</h3>
+    <p>
+      在套餐单笔贡献为正且门店有足够产能时，更高核销通常有助于兑现收入；若单笔亏损，更多核销可能放大亏损。还要考虑排队、服务质量、退款和复购，不能只盯一个比例。
+    </p>
+  </div>
+  <div class="card">
+    <h3>面试官追问：怎么算“新增生意”？</h3>
+    <p>
+      需要建立比较基准，例如可比门店或相近周期，并尽量排除季节、大促和其他渠道活动变化。用户标记为新客，也不自动证明所有收入都是平台带来的净增量。
+    </p>
+  </div>
+</div>
+<label for="calc-note">用自己的话说明：你会建议商家先改什么，为什么？</label
+><textarea
+  id="calc-note"
+  data-note="calc-reflection"
+  placeholder="先写结论，再写支撑数据、仍缺的信息，以及小范围验证的方法。"
+></textarea>
